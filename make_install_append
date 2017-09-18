@@ -1,0 +1,6 @@
+mv %{buildroot}/usr/lib/systemd/system/cc-proxy.service %{buildroot}/usr/lib/systemd/system/cc3-proxy.service
+mv %{buildroot}/usr/lib/systemd/system/cc-proxy.socket %{buildroot}/usr/lib/systemd/system/cc3-proxy.socket
+mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
+mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../cc3-proxy.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/cc3-proxy.socket
+ln -s ../cc3-proxy.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/cc3-proxy.service

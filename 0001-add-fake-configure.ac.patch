@@ -1,0 +1,39 @@
+From 6a372197043ccd44c22aee47a927bfa9b4252b5e Mon Sep 17 00:00:00 2001
+From: Julio Montes <julio.montes@intel.com>
+Date: Thu, 14 Sep 2017 14:48:42 -0500
+Subject: [PATCH] add fake configure.ac
+
+Signed-off-by: Julio Montes <julio.montes@intel.com>
+---
+ Makefile     | 4 ++++
+ configure.ac | 1 +
+ 2 files changed, 5 insertions(+)
+ create mode 100644 configure.ac
+
+diff --git a/Makefile b/Makefile
+index b3274c9..621ec3d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -52,8 +52,12 @@ all: cc-proxy $(UNIT_FILES)
+ #
+ 
+ cc-proxy: $(SOURCES) Makefile
++	ln -sf . vendor/src
++	mkdir -p vendor/src/github.com/clearcontainers/
++	ln -sf $(PWD)/ vendor/src/github.com/clearcontainers/proxy
+ 	$(QUIET_GOBUILD)go build -i -o $@ -ldflags \
+ 		"-X main.DefaultSocketPath=$(PROXY_SOCKET) -X main.Version=$(VERSION)"
++	unlink vendor/src
+ 
+ #
+ # Tests
+diff --git a/configure.ac b/configure.ac
+new file mode 100644
+index 0000000..21d231e
+--- /dev/null
++++ b/configure.ac
+@@ -0,0 +1 @@
++AC_INIT([])
+-- 
+2.7.5
+
