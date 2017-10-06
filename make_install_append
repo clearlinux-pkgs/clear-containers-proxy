@@ -1,4 +1,5 @@
 mv %{buildroot}/usr/lib/systemd/system/cc-proxy.service %{buildroot}/usr/lib/systemd/system/cc3-proxy.service
+sed -i -e  's!^\(ExecStart=.*\)!\1 -ksm off!g' %{buildroot}/usr/lib/systemd/system/cc3-proxy.service
 mv %{buildroot}/usr/lib/systemd/system/cc-proxy.socket %{buildroot}/usr/lib/systemd/system/cc3-proxy.socket
 mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
 mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
