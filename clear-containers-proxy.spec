@@ -4,7 +4,7 @@
 #
 Name     : clear-containers-proxy
 Version  : 3.0.4
-Release  : 9
+Release  : 10
 URL      : https://github.com/clearcontainers/proxy/archive/3.0.4.tar.gz
 Source0  : https://github.com/clearcontainers/proxy/archive/3.0.4.tar.gz
 Summary  : No detailed summary available
@@ -59,12 +59,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1508364646
+export SOURCE_DATE_EPOCH=1508368039
 %reconfigure --disable-static
 make V=1  %{?_smp_mflags} GOPATH="$PWD/vendor"
 
 %install
-export SOURCE_DATE_EPOCH=1508364646
+export SOURCE_DATE_EPOCH=1508368039
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -72,9 +72,7 @@ mv %{buildroot}/usr/lib/systemd/system/cc-proxy.service %{buildroot}/usr/lib/sys
 sed -i -e  's!^\(ExecStart=.*\)!\1 -ksm off!g' %{buildroot}/usr/lib/systemd/system/cc3-proxy.service
 mv %{buildroot}/usr/lib/systemd/system/cc-proxy.socket %{buildroot}/usr/lib/systemd/system/cc3-proxy.socket
 mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
-mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../cc3-proxy.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/cc3-proxy.socket
-ln -s ../cc3-proxy.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/cc3-proxy.service
 ## make_install_append end
 
 %files
@@ -82,7 +80,6 @@ ln -s ../cc3-proxy.service %{buildroot}/usr/lib/systemd/system/multi-user.target
 
 %files autostart
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/multi-user.target.wants/cc3-proxy.service
 /usr/lib/systemd/system/sockets.target.wants/cc3-proxy.socket
 
 %files bin
@@ -91,7 +88,6 @@ ln -s ../cc3-proxy.service %{buildroot}/usr/lib/systemd/system/multi-user.target
 
 %files config
 %defattr(-,root,root,-)
-%exclude /usr/lib/systemd/system/multi-user.target.wants/cc3-proxy.service
 %exclude /usr/lib/systemd/system/sockets.target.wants/cc3-proxy.socket
 /usr/lib/systemd/system/cc3-proxy.service
 /usr/lib/systemd/system/cc3-proxy.socket
