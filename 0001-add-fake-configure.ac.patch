@@ -17,12 +17,12 @@ index b3274c9..621ec3d 100644
 @@ -52,8 +52,12 @@ all: cc-proxy $(UNIT_FILES)
  #
  
- cc-proxy: $(SOURCES) Makefile
+ cc-proxy: $(SOURCES) Makefile VERSION
 +	ln -sf . vendor/src
 +	mkdir -p vendor/src/github.com/clearcontainers/
 +	ln -sf $(PWD)/ vendor/src/github.com/clearcontainers/proxy
  	$(QUIET_GOBUILD)go build -i -o $@ -ldflags \
- 		"-X main.DefaultSocketPath=$(PROXY_SOCKET) -X main.Version=$(VERSION)"
+ 		"-X main.DefaultSocketPath=$(PROXY_SOCKET) -X main.Version=$(VERSION_COMMIT)"
 +	unlink vendor/src
  
  #
