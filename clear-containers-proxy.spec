@@ -4,7 +4,7 @@
 #
 Name     : clear-containers-proxy
 Version  : 3.0.16
-Release  : 21
+Release  : 22
 URL      : https://github.com/clearcontainers/proxy/archive/3.0.16.tar.gz
 Source0  : https://github.com/clearcontainers/proxy/archive/3.0.16.tar.gz
 Summary  : No detailed summary available
